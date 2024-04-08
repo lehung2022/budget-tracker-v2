@@ -52,7 +52,7 @@ export default function BudgetCard({
           {/* Conditionally render the "Edit" button based on hideEditButton prop */}
           {!hideEditButton && (
             <Button variant="info" onClick={handleEditClick}>
-              Cập Nhật
+              Sửa
             </Button>
           )}
         </Card.Title>
@@ -67,7 +67,7 @@ export default function BudgetCard({
         {/* Display edit date */}
         {editDate && (
           <div className="edit-view mb-2 text-primary">
-            Cập nhật lúc: {moment(editDate).format("DD/MM/YYYY h:mm:ss")}
+            Đã sửa lúc: {moment(editDate).format("DD/MM/YYYY h:mm:ss")}
           </div>
         )}
         {/* Display edit date */}
@@ -103,7 +103,7 @@ export default function BudgetCard({
 
         {_date && (
           <div className="time-view text-primary">
-            Thêm ngân sách lúc: {moment(_date).format("DD/MM/YYYY h:mm:ss")}
+            Thêm lúc: {moment(_date).format("DD/MM/YYYY h:mm:ss")}
           </div>
         )}
         {/* Display the date */}
