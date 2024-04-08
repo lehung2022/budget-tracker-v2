@@ -1,0 +1,25 @@
+body {
+  background-image: url(./assets/background.jpg);
+  background-size: cover;
+}
+
+.time-view {
+  position: relative;
+  display: flex; /* Use flexbox for positioning */
+  justify-content: center; /* Align children to the end (right) of the container */
+  margin-top: 0.5rem;
+}
+
+.edit-view {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.expense-view {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
