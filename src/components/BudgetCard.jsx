@@ -16,7 +16,7 @@ export default function BudgetCard({
   onEditClick,
   hideEditButton, // Accept the hideEditButton prop
   editDate,
-  expenseDate
+  expenseDate,
 }) {
   const classNames = [];
   if (amount > max) {

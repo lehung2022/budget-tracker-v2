@@ -72,9 +72,7 @@ function App() {
                 editDate={budget.editDate}
                 expenseDate={budget.expenseDate}
                 max={budget.max}
-                onAddExpenseClick={() =>
-                  openAddExpenseModal(budget.id, new Date())
-                } // Pass the current date when adding expense
+                onAddExpenseClick={() => openAddExpenseModal(budget.id)} // Pass the current date when adding expense
                 onViewExpensesClick={() =>
                   setViewExpensesModalBudgetId(budget.id)
                 }
