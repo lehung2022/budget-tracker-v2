@@ -57,7 +57,7 @@ function App() {
             alignItems: "flex-start",
           }}
         >
-          {budgets.map((budget, index) => {
+          {budgets.map((budget) => {
             const amount = getBudgetExpenses(budget.id).reduce(
               (total, expense) => total + expense.amount,
               0
@@ -73,6 +73,7 @@ function App() {
                 expenseDate={budget.expenseDate}
                 max={budget.max}
                 onAddExpenseClick={() => openAddExpenseModal(budget.id)} // Pass the current date when adding expense
+                currentDate={budget.currentDate}
                 onViewExpensesClick={() =>
                   setViewExpensesModalBudgetId(budget.id)
                 }

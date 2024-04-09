@@ -16,7 +16,6 @@ export default function BudgetCard({
   onEditClick,
   hideEditButton, // Accept the hideEditButton prop
   editDate,
-  expenseDate,
 }) {
   const classNames = [];
   if (amount > max) {
@@ -38,8 +37,9 @@ export default function BudgetCard({
     onEditClick(editDate);
   }
 
-  function handleAddExpenseClick () {
-    onAddExpenseClick(expenseDate)
+  function handleAddExpenseClick() {
+    const currentDate = new Date(); // Get the current date and time
+    onAddExpenseClick(currentDate); // Pass the current date and time to the callback
   }
 
   const { editBudget } = useBudgets();
@@ -92,14 +92,9 @@ export default function BudgetCard({
             <Button onClick={onViewExpensesClick} variant="outline-info">
               Xem chi tiêu
             </Button>
+            
           </Stack>
         )}
-        {expenseDate && (
-          <div className="expense-view text-primary">
-            Thêm chi tiêu lúc: {moment(expenseDate).format("DD/MM/YYYY h:mm:ss")}
-          </div>
-        )}
-        {/* Display the expense date */}
 
         {_date && (
           <div className="time-view text-primary">

@@ -1,16 +1,21 @@
-import { Modal, Button, Stack } from "react-bootstrap"
-import { UNCATEGORIZED_BUDGET_ID, useBudgets } from "../context/BudgetContext"
-import { currencyFormatter } from "../utils"
+import { Modal, Button, Stack } from "react-bootstrap";
+import { UNCATEGORIZED_BUDGET_ID, useBudgets } from "../context/BudgetContext";
+import { currencyFormatter } from "../utils";
+import moment from "moment"; // Import moment for date formatting
 
 export default function ViewExpensesModal({ budgetId, handleClose }) {
   const { getBudgetExpenses, budgets, deleteBudget, deleteExpense } =
-    useBudgets()
+    useBudgets();
 
-  const expenses = getBudgetExpenses(budgetId)
+  const expenses = getBudgetExpenses(budgetId).map((expense) => ({
+    ...expense,
+    time: moment(expense.time).format("DD/MM/YYYY HH:mm:ss"), // Format time
+  }));
+  console.log("Expenses:", expenses); // Log expenses array
   const budget =
     UNCATEGORIZED_BUDGET_ID === budgetId
       ? { name: "Uncategorized", id: UNCATEGORIZED_BUDGET_ID }
-      : budgets.find(b => b.id === budgetId)
+      : budgets.find((b) => b.id === budgetId);
 
   return (
     <Modal show={budgetId != null} onHide={handleClose}>
@@ -21,8 +26,8 @@ export default function ViewExpensesModal({ budgetId, handleClose }) {
             {budgetId !== UNCATEGORIZED_BUDGET_ID && (
               <Button
                 onClick={() => {
-                  deleteBudget(budget)
-                  handleClose()
+                  deleteBudget(budget);
+                  handleClose();
                 }}
                 variant="outline-danger"
               >
@@ -34,23 +39,27 @@ export default function ViewExpensesModal({ budgetId, handleClose }) {
       </Modal.Header>
       <Modal.Body>
         <Stack direction="vertical" gap="3">
-          {expenses.map(expense => (
-            <Stack direction="horizontal" gap="2" key={expense.id}>
-              <div className="me-auto fs-4">{expense.description}</div>
-              <div className="fs-5">
-                {currencyFormatter.format(expense.amount)}
+          {expenses.map((expense) => (
+            <div key={expense.id}>
+              <div className="d-flex align-items-center mb-2">
+                <div className="me-auto fs-4">{expense.description}</div>
+                <div className="fs-5">
+                  {currencyFormatter.format(expense.amount)}
+                </div>
+                <Button
+                  onClick={() => deleteExpense(expense)}
+                  size="sm"
+                  variant="outline-danger"
+                >
+                  &times;
+                </Button>
               </div>
-              <Button
-                onClick={() => deleteExpense(expense)}
-                size="sm"
-                variant="outline-danger"
-              >
-                &times;
-              </Button>
-            </Stack>
+              {/* Separate div for "Edit Time" */}
+              <div className="text-muted mb-2">Edit time: {expense.time}</div>
+            </div>
           ))}
         </Stack>
       </Modal.Body>
     </Modal>
-  )
+  );
 }

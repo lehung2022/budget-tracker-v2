@@ -1,25 +1,37 @@
-import { Form, Modal, Button } from "react-bootstrap"
-import { useRef } from "react"
-import { useBudgets, UNCATEGORIZED_BUDGET_ID } from "../context/BudgetContext"
+import { Form, Modal, Button } from "react-bootstrap";
+import { useRef, useState, useEffect } from "react";
+// import DatePicker from "react-datepicker"; 
+// Import the DatePicker component
+// import "react-datepicker/dist/react-datepicker.css"; 
+// Import the styles for DatePicker
+import { useBudgets, UNCATEGORIZED_BUDGET_ID } from "../context/BudgetContext";
 
 export default function AddExpenseModal({
   show,
   handleClose,
   defaultBudgetId,
 }) {
-  const descriptionRef = useRef()
-  const amountRef = useRef()
-  const budgetIdRef = useRef()
-  const { addExpense, budgets } = useBudgets()
+  const descriptionRef = useRef();
+  const amountRef = useRef();
+  const budgetIdRef = useRef();
+  const { addExpense, budgets } = useBudgets();
+  const [selectedDate, setSelectedDate] = useState(new Date()); // State for selected date
+
+  useEffect(() => {
+    // Set selectedDate to current date and time when component mounts
+    setSelectedDate(new Date());
+    // this setSeletctedDate must be passed onto the ViewExpensesModal.jsx
+  }, []); // Empty dependency array to run the effect only once
 
   function handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
     addExpense({
       description: descriptionRef.current.value,
       amount: parseFloat(amountRef.current.value),
       budgetId: budgetIdRef.current.value,
-    })
-    handleClose()
+      time: selectedDate, // Include the selected date
+    });
+    handleClose();
   }
 
   return (
@@ -47,12 +59,20 @@ export default function AddExpenseModal({
             <Form.Label>Ngân sách</Form.Label>
             <Form.Select defaultValue={defaultBudgetId} ref={budgetIdRef}>
               <option id={UNCATEGORIZED_BUDGET_ID}>Uncategorized</option>
-              {budgets.map(budget => (
+              {budgets.map((budget) => (
                 <option key={budget.id} value={budget.id}>
                   {budget.name}
                 </option>
               ))}
             </Form.Select>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="date">
+            <Form.Label>
+              Giờ chỉnh sửa: {selectedDate.toLocaleString()}
+              {/* This is wrong. It keeps giving me fixed time. Gotta fix this */}
+            </Form.Label>{" "}
+            {/* Update the label to "Time" */}
+            <br />
           </Form.Group>
           <div className="d-flex justify-content-end">
             <Button variant="primary" type="submit">
@@ -62,5 +82,5 @@ export default function AddExpenseModal({
         </Modal.Body>
       </Form>
     </Modal>
-  )
+  );
 }
