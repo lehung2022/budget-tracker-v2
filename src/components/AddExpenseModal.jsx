@@ -5,11 +5,13 @@ import { useRef, useState, useEffect } from "react";
 // import "react-datepicker/dist/react-datepicker.css"; 
 // Import the styles for DatePicker
 import { useBudgets, UNCATEGORIZED_BUDGET_ID } from "../context/BudgetContext";
+import moment from "moment";
 
 export default function AddExpenseModal({
   show,
   handleClose,
   defaultBudgetId,
+  expenseDate
 }) {
   const descriptionRef = useRef();
   const amountRef = useRef();
@@ -68,7 +70,7 @@ export default function AddExpenseModal({
           </Form.Group>
           <Form.Group className="mb-3" controlId="date">
             <Form.Label>
-              Giờ chỉnh sửa: {selectedDate.toLocaleString()}
+              Đã thêm lúc: {moment(expenseDate).format("DD/MM/YYYY h:mm:ss")}
               {/* This is wrong. It keeps giving me fixed time. Gotta fix this */}
             </Form.Label>{" "}
             {/* Update the label to "Time" */}

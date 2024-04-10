@@ -98,7 +98,7 @@ export default function BudgetCard({
 
         {_date && (
           <div className="time-view text-primary">
-            Thêm lúc: {moment(_date).format("DD/MM/YYYY h:mm:ss")}
+            Thêm ngân sách lúc: {moment(_date).format("DD/MM/YYYY h:mm:ss")}
           </div>
         )}
         {/* Display the date */}

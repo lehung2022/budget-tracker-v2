@@ -70,7 +70,6 @@ function App() {
                 amount={amount}
                 _date={budget._date} // Pass the date property to the BudgetCard component
                 editDate={budget.editDate}
-                expenseDate={budget.expenseDate}
                 max={budget.max}
                 onAddExpenseClick={() => openAddExpenseModal(budget.id)} // Pass the current date when adding expense
                 currentDate={budget.currentDate}

@@ -55,7 +55,7 @@ export default function ViewExpensesModal({ budgetId, handleClose }) {
                 </Button>
               </div>
               {/* Separate div for "Edit Time" */}
-              <div className="text-muted mb-2">Edit time: {expense.time}</div>
+              <div className="text-muted mb-2">Đã thêm lúc: {expense.time}</div>
             </div>
           ))}
         </Stack>
