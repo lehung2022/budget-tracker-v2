@@ -4,14 +4,14 @@ import { currencyFormatter } from "../utils";
 import moment from "moment"; // Import moment for date formatting
 
 export default function ViewExpensesModal({ budgetId, handleClose }) {
-  const { getBudgetExpenses, budgets, deleteBudget, deleteExpense } =
+  const { getBudgetExpenses, budgets, deleteBudget, deleteExpense, expenseDate } =
     useBudgets();
 
   const expenses = getBudgetExpenses(budgetId).map((expense) => ({
     ...expense,
-    time: moment(expense.time).format("DD/MM/YYYY HH:mm:ss"), // Format time
+    expenseDate: moment(expense.expenseDate).format("DD/MM/YYYY HH:mm:ss"), // Format expenseDate
   }));
-  console.log("Expenses:", expenses); // Log expenses array
+
   const budget =
     UNCATEGORIZED_BUDGET_ID === budgetId
       ? { name: "Uncategorized", id: UNCATEGORIZED_BUDGET_ID }
@@ -55,7 +55,7 @@ export default function ViewExpensesModal({ budgetId, handleClose }) {
                 </Button>
               </div>
               {/* Separate div for "Edit Time" */}
-              <div className="text-muted mb-2">Đã thêm lúc: {expense.time}</div>
+              <div className="text-muted mb-2">Đã thêm lúc: {expense.expenseDate}</div>
             </div>
           ))}
         </Stack>

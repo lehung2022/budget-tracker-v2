@@ -31,7 +31,7 @@ export default function AddExpenseModal({
       description: descriptionRef.current.value,
       amount: parseFloat(amountRef.current.value),
       budgetId: budgetIdRef.current.value,
-      time: selectedDate, // Include the selected date
+      expenseDate: selectedDate, // Include the selected date
     });
     handleClose();
   }

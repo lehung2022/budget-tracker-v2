@@ -25,7 +25,7 @@ export const BudgetProvider = ({ children }) => {
   function addExpense({ description, amount, budgetId }) {
     const expenseDate = new Date();
     setExpenses((prevExpenses) => {
-      return [...prevExpenses, { id: uuidV4(), description, amount, budgetId }];
+      return [...prevExpenses, { id: uuidV4(), description, amount, budgetId, expenseDate }];
     });
   }
   function addBudget({ name, max }) {
