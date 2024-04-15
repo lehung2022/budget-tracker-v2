@@ -4,8 +4,12 @@ import { currencyFormatter } from "../utils";
 import moment from "moment"; // Import moment for date formatting
 
 export default function ViewExpensesModal({ budgetId, handleClose }) {
-  const { getBudgetExpenses, budgets, deleteBudget, deleteExpense, expenseDate } =
-    useBudgets();
+  const {
+    getBudgetExpenses,
+    budgets,
+    deleteBudget,
+    deleteExpense,
+  } = useBudgets();
 
   const expenses = getBudgetExpenses(budgetId).map((expense) => ({
     ...expense,
@@ -43,7 +47,7 @@ export default function ViewExpensesModal({ budgetId, handleClose }) {
             <div key={expense.id}>
               <div className="d-flex align-items-center mb-2">
                 <div className="me-auto fs-4">{expense.description}</div>
-                <div className="fs-5">
+                <div className="fs-5 mx-2">
                   {currencyFormatter.format(expense.amount)}
                 </div>
                 <Button
@@ -55,7 +59,9 @@ export default function ViewExpensesModal({ budgetId, handleClose }) {
                 </Button>
               </div>
               {/* Separate div for "Edit Time" */}
-              <div className="text-muted mb-2">Đã thêm lúc: {expense.expenseDate}</div>
+              <div className="text-muted mb-2">
+                Đã thêm lúc: {expense.expenseDate}
+              </div>
             </div>
           ))}
         </Stack>

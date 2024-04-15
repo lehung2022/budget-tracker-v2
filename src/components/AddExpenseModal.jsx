@@ -71,7 +71,7 @@ export default function AddExpenseModal({
           <Form.Group className="mb-3" controlId="date">
             <Form.Label>
               Đã thêm lúc: {moment(expenseDate).format("DD/MM/YYYY h:mm:ss")}
-              {/* This is wrong. It keeps giving me fixed time. Gotta fix this */}
+              {/* This has been fixed */}
             </Form.Label>{" "}
             {/* Update the label to "Time" */}
             <br />

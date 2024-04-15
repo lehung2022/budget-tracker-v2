@@ -92,7 +92,6 @@ export default function BudgetCard({
             <Button onClick={onViewExpensesClick} variant="outline-info">
               Xem chi tiêu
             </Button>
-            
           </Stack>
         )}
 
