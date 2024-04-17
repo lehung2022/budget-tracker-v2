@@ -19,7 +19,7 @@ function App() {
   const { budgets, getBudgetExpenses } = useBudgets();
   const [showEditBudgetModal, setShowEditBudgetModal] = useState(false); // State for EditBudgetModal
   const [editBudgetId, setEditBudgetId] = useState(); // State for edited budget ID
-  const isBelow400px = useScreenBelowBreakpoint(400);
+  const isBelow320px = useScreenBelowBreakpoint(320);
 
   function openAddExpenseModal(budgetId) {
     setShowAddExpenseModal(true);
@@ -40,7 +40,7 @@ function App() {
   console.log("Budgets from context:", budgets);
 
   let content;
-  if (isBelow400px) {
+  if (isBelow320px) {
     content = (
       <div style={{ textAlign: "center", paddingTop: "50vh" }}>
         <p>Nothing to display</p>

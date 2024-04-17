@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
  * @param [breakpoint=400] - The breakpoint in pixels at which the message is displayed.
  * @returns {boolean} - A boolean value indicating whether the screen width is below the specified breakpoint.
  */
-export const useScreenBelowBreakpoint = (breakpoint = 400) => {
+export const useScreenBelowBreakpoint = (breakpoint = 320) => {
   const [isBelowBreakpoint, setIsBelowBreakpoint] = useState(false);
 
   const checkScreenSize = () => {
