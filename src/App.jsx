@@ -6,11 +6,12 @@ import ViewExpensesModal from "./components/ViewExpensesModal";
 import BudgetCard from "./components/BudgetCard";
 import UncategorizedBudgetCard from "./components/UncategorizedBudgetCard";
 import TotalBudget from "./components/TotalBudget";
-import RemainBudget from "./components/RemainBudget"
+import RemainBudget from "./components/RemainBudget";
 import { useState } from "react";
 import { UNCATEGORIZED_BUDGET_ID, useBudgets } from "./context/BudgetContext";
 import EditBudgetModal from "./components/EditBudgetModal";
 import { useScreenBelowBreakpoint } from "./hooks/useScreenBelowBreakpoint";
+import InstallationButton from "./components/InstallationButton";
 
 function App() {
   const [showAddBudgetModal, setShowAddBudgetModal] = useState(false);
@@ -102,6 +103,8 @@ function App() {
             />
             <TotalBudget />
             <RemainBudget />
+            <InstallationButton />{" "}
+            {/* Include the InstallationButton component */}
           </div>
         </Container>
         <AddBudgetModal
@@ -117,7 +120,6 @@ function App() {
           budgetId={viewExpensesModalBudgetId}
           handleClose={() => setViewExpensesModalBudgetId()}
         />
-
         {showEditBudgetModal && ( // Render EditBudgetModal only if showEditBudgetModal is true
           <EditBudgetModal
             show={showEditBudgetModal}

@@ -1,7 +1,7 @@
 import { useBudgets } from "../context/BudgetContext";
 import RemainCard from "./RemainCard";
 
-export default function TotalBudget() {
+export default function RemainBudget() {
   const { expenses, budgets } = useBudgets();
   // Calculate total expenses
   const totalExpenses = Array.isArray(expenses)

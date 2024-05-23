@@ -42,7 +42,7 @@ export default function BudgetCard({
     onAddExpenseClick(currentDate); // Pass the current date and time to the callback
   }
 
-  const { editBudget } = useBudgets();
+  // const { editBudget } = useBudgets();
   // Use the useBudgets hook
   return (
     <Card className={classNames.join(" ")}>

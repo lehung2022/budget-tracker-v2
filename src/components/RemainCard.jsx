@@ -18,7 +18,7 @@ export default function RemainCard({
   editDate,
 }) {
   const classNames = [];
-  if (amount > max) {
+  if (amount < max) {
     classNames.push("bg-danger", "bg-opacity-10", "text-primary");
   } else if (gray) {
     classNames.push("bg-light", "text-primary");
