@@ -1,30 +1,55 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 
 function InstallationButton() {
-  function handleInstallClick() {
-    const installPromptEvent = window.deferredPrompt;
+  const [supportsPWA, setSupportsPWA] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [isAppInstalled, setIsAppInstalled] = useState(false);
 
-    if (installPromptEvent) {
-      installPromptEvent.prompt();
+  useEffect(() => {
+    const beforeInstallPromptHandler = (event) => {
+      event.preventDefault();
+      setSupportsPWA(true);
+      setDeferredPrompt(event); // No type casting needed in JavaScript
+    };
 
-      installPromptEvent.userChoice.then((choiceResult) => {
+    const detectAppInstallation = () => {
+      window
+        .matchMedia("(display-mode: standalone)")
+        .addEventListener("change", (event) => {
+          setIsAppInstalled(event.matches);
+        });
+    };
+
+    window.addEventListener("beforeinstallprompt", beforeInstallPromptHandler);
+    detectAppInstallation();
+
+    return () => {
+      window.removeEventListener(
+        "beforeinstallprompt",
+        beforeInstallPromptHandler
+      );
+    };
+  }, []);
+
+  const installPWA = () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
         if (choiceResult.outcome === "accepted") {
-          console.log("User accepted the installation prompt");
-          // Optionally, track installation success
-        } else {
-          console.log("User dismissed the installation prompt");
-          // Optionally, track installation failure
+          console.log("App installed successfully!");
         }
-
-        // Reset the deferredPrompt for future use
-        window.deferredPrompt = null;
       });
     }
-  }
+  };
 
   return (
-    <Button variant="primary" onClick={handleInstallClick}>
+    <Button
+      variant="primary"
+      className="pwa-install-button"
+      disabled={!supportsPWA || isAppInstalled}
+      onClick={installPWA}
+    >
       Cài đặt
     </Button>
   );
